@@ -261,7 +261,7 @@ iplot(fig)
 py.offline.plot(fig, filename='plots/my_scatter_plot.html')
 ```
 
-# Insert GIF Here
+![](scatter1.gif)
 
 Getting the hang of it? Pretty neat, right. Now we're ready for some more complicated graphs. But we could do better. 
 
@@ -298,7 +298,7 @@ py.offline.plot(fig, filename='plots/my_scatter_plot.html') # overwriting the pr
                                                       # this one is obviously better
 ```
 
-# insert gif here
+![](scatter2.gif)
 
 Now that we're dynamic plot pros, we're ready to move on the big challenge: creating a GIS map of policy decisions by institution. Though it looks challenging, it's not too challenging once you understand what's going on "under the hood" in Plotly (which is what we've been practicing!). 
 
@@ -414,7 +414,7 @@ fig.show()
 fig.write_html("plots/map.html")
 ```
 
-# Insert GIF Here
+![](map.gif)
 
 
 And now we have an awesome interactive map of the United States, along with policy decisions of each 4-year institution in the data set. Beautiful!
@@ -431,13 +431,13 @@ For guidance on how to create your own website using Blogdown in R, I recommend 
 
 If you've worked with Blogdown in the past, you likely know about the `public` and `static` directories. To summarize, the `public` directory involves everything needed to build the site, and is often linked to its own GitHub repository. This is where the "magic" happens and your website is published. The static directory, on the other hand, contains all the files you want to publicize on your website. A typical Blogdown folder looks like the following:
 
-# insert screenshot here
+![](dir.png)
 
 If you noticed above, we were saving each of our interactive visualizations in `.html` format along the way in a special `plots` folder within the working directory. This is where all of these graphs are saved. 
 
 Now we just need to drag these graphs into our `static` directory in our `Website` folder (or, if you wanted to, you could have saved these graphs directly to the static folder!). 
 
-# Insert GIF Here
+![](dragging.gif)
 
 If you know Blogdown, you know you have to build your site using a special R script before pushing your changes to GitHub. We can do this with the R code below:
 
