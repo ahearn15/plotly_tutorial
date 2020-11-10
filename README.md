@@ -10,7 +10,7 @@ Plotly is a data vizualization tool available in multiple languages. The Plotly 
 
 ## Installing Plotly
 
-We can install Plotly with the following magic command in Jupyter Notebook:
+We can install Plotly with the following magic command in Jupyter Notebook (to follow along, download the `tutorial.ipynb` above):
 
 
 ```python
