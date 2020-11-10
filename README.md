@@ -200,16 +200,25 @@ dta.head(5)
 
 ## Simple, interactive graphs in Plotly
 
-Before we get into the more complicated GIS graphs (using the lat/long data), we'll start with some simpler ones. Like a **histogram**:
+Before we get into the more complicated GIS graphs (using the latitude/longitude variables in my data), we'll start with some simpler ones. Like a **histogram**:
 
-We'll be plotting the distribution of ACT scores in my sample of institutions:
+Note the five key steps in creating a Plotly graph: 
+1. Defining the **data**
+2. Defining the **layout**
+3. Defining the **figure**
+4. **Plotting** the figure
+5. **Saving** the figure
+
+We'll be using these five simple steps for the remainder of the tutorial. 
+
+In this graph, we'll be plotting the distribution of ACT scores in my sample of institutions:
 
 
 ```python
 # the data
-data = [go.Histogram(x=dta['act_avg'],
-                     nbinsx=40,
-                     histnorm='density')]
+data = [go.Histogram(x=dta['act_avg'], # x axis variable
+                     nbinsx=40, # number of bins
+                     histnorm='density')] #we could have percentages on the LHS, but I want count
 
 # the layout 
 layout = go.Layout(title="ACT Score Distribution",
@@ -228,16 +237,15 @@ py.offline.plot(fig, filename='plots/my_first_plot.html')
 
 ![](hist.gif)
 
-
-
 We saved the graph to our local dictionary as an `.html` file, so we will soon post it to our fancy blogdown website!
 
-Now we can do a **scatter plot**: Let's look at the relationship between in-state and out-of-state tuition rates for public universities:
+Now we can do a **scatter plot**: Let's look at the relationship between in-state and out-of-state tuition rates for public universities. We'll once again be following the simple five-step guidelines outlined above.
 
 
 ```python
-pub = dta[dta['public'] == 1]
+pub = dta[dta['public'] == 1] #subsetting only private universities
 
+# the data
 data = [go.Scatter(x=pub['tuition_in'],
                    y=pub['tuition_out'],
                    text = pub['institution'],
@@ -260,26 +268,26 @@ py.offline.plot(fig, filename='plots/my_scatter_plot.html')
 
 ![](scatter1.gif)
 
-Getting the hang of it? Pretty neat, right. Now we're ready for some more complicated graphs. But we could do better. 
+Getting the hang of it? Pretty neat, right. The syntax is very similar to that of ``ggplot``, so luckily Plotly, for our purposes, is pretty easy to get the hang of. But we could do better: now we're ready for some more complicated graphs. 
 
-Let's replicate the graph above to include colors for institutions that were fully online this Fall, as well as size by enrollment. 
+Let's replicate the graph above to include colors for institutions that were fully online this Fall, as well as size by enrollment. Pay close attention to my comments next to my code, as this will lay the framework for our most complicated graph of the tutorial (coming soon!). 
 
 
 ```python
 pub = dta[dta['public'] == 1] # subset to only include public institutions
 
-
-data = [go.Scatter(x=pub['tuition_in'],
-                   y=pub['tuition_out'],
-                   text = pub['institution'],
+#the data
+data = [go.Scatter(x=pub['tuition_in'], # x var
+                   y=pub['tuition_out'], # y var
+                   text = pub['institution'], # the text that comes up when you hover over a bubble
                    mode = 'markers',
                    marker=dict(size=pub['enrollment']/1000, # we need to scale this variable 
-                               color=pub['online'],
-                               colorscale = "Portland", # 
+                               color=pub['online'], #This defines what variable we want for the bubble color
+                               colorscale = "Portland", # I like this color scale
                                showscale=False))] 
 
 # the layout 
-layout = go.Layout(title="In-state vs. Out-of-state tuition rates: 4-year public institutions <br>\
+layout = go.Layout(title="In-state vs. Out-of-state tuition rates: 4-year public institutions <br>\ #we have to use html formatting
                           Blue represents in-person instruction",
                   xaxis=dict(title = 'In-state'),
                   yaxis=dict(title = 'Out-of-state'))
@@ -316,12 +324,6 @@ Since we're working with a categorical outcome variable (`policy`), we need to d
 
 ```python
 #sort by policy
-dta = dta[(dta['policy'] == "Fully in person") | \
-    (dta['policy'] == "Fully online") | \
-    (dta['policy'] == "Hybrid") | \
-    (dta['policy'] == "Primarily in person") | \
-    (dta['policy'] == 'Primarily online')]
-
 dta = dta.sort_values(by = ['policy'])
 
 loc = 0
@@ -377,10 +379,12 @@ Now we're ready to plot our beautiful new map.
 
 
 ```python
-scale = 400
+scale = 400 # we need to make the enrollment bubbles smaller by scaling them
 
-fig = go.Figure()
+# define the figure
+fig = go.Figure() 
 
+# the data
 for i in range(len(limits)): # looping over each policy
     lim = limits[i] 
     dta_sub = dta[lim[0]:lim[1]] # subsetting the data to get the policy we want
@@ -398,6 +402,7 @@ for i in range(len(limits)): # looping over each policy
         ),
         name = policies[i]))
 
+# the layout
 fig.update_layout(
         title_text = '2020 Fall Instruction Plans<br> \
                       4-year Postsecondary Institutions',
@@ -407,14 +412,16 @@ fig.update_layout(
             landcolor = 'rgb(217, 217, 217)', #multiple ways to define colors!
         )
     )
-
+# display the graph
 fig.show()
+
+# save the graph
 fig.write_html("plots/map.html")
 ```
 
 ![](map.gif)
 
-And now we have an awesome interactive map of the United States, along with policy decisions of each 4-year institution in the data set. Beautiful!
+And now we have an awesome interactive map of the United States, along with policy decisions of each 4-year institution in the data set. Beautiful! Note that we still utilized our special five steps, although we needed to re-order them a bit. First we definied the figure, then added the data and the layout since we were working with categorial variables for the color of each dot.
 
 So, now what? We can't just print this out and have the same features. What if you wanted to show it to your friends so they can hover over their tiny alma mater? To share it with our friends, we must host it to a website. Now on to **Part II: Publishing your Graphs.** 
 
