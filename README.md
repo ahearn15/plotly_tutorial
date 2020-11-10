@@ -428,7 +428,7 @@ For guidance on how to create your own website using Blogdown in R, I recommend 
 
 If you've worked with Blogdown in the past, you likely know about the `public` and `static` directories. To summarize, the `public` directory involves everything needed to build the site, and is often linked to its own GitHub repository. This is where the "magic" happens and your website is published. The static directory, on the other hand, contains all the files you want to publicize on your website. A typical Blogdown folder looks like the following:
 
-[](dir.gif)
+[](dir.png)
 
 
 If you noticed above, we were saving each of our interactive visualizations in `.html` format along the way in a special `plots` folder within the working directory. This is where all of these graphs are saved. 
