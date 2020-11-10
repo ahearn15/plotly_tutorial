@@ -35,11 +35,14 @@ init_notebook_mode(connected=True)
 
 
 
-Now we're ready to work with some real data! For this exercise, we'll be using data from a research project of mine: mapping Fall 2020 modes of instruction of 4-year colleges and universities, which is available on my GitHub page here:
+Now we're ready to work with some real data! For this exercise, we'll be using data from a research project of mine: mapping Fall 2020 modes of instruction of 4-year colleges and universities, which is available on my GitHub:
 
 
 ```python
 dta = pd.read_csv('covid_college.csv')
+
+# just the data we need
+#dta = dta[['institution', 'lat', 'lon', 'act_avg', 'adm_rate', 'online','enrollment', 'endowment', 'public']]
 
 dta.head(5)
 ```
@@ -199,9 +202,8 @@ dta.head(5)
 <p>900 rows × 45 columns</p>
 
 
-### Plotting simple, interactive graphs in Plotly
 
-Before we get into the more complicated GIS graphs (using latitude/longitude data), we'll start with some simpler ones. Like a **histogram**:
+Before we get into the more complicated GIS graphs (using the lat/long data), we'll start with some simpler ones. Like a **histogram**:
 
 We'll be plotting the distribution of ACT scores in my sample of institutions:
 
@@ -229,7 +231,9 @@ py.offline.plot(fig, filename='plots/my_first_plot.html')
 
 ![](hist.gif)
 
-Note that the output above is a GIF of the output you should see when you run the code yourself. We also saved this plot as an `.html` file, which we'll use later to publish to our website.
+
+
+We saved the graph to our local dictionary as an `.html` file, so we will soon post it to our fancy blogdown website!
 
 Now we can do a **scatter plot**: Let's look at the relationship between in-state and out-of-state tuition rates for public universities:
 
@@ -257,7 +261,7 @@ iplot(fig)
 py.offline.plot(fig, filename='plots/my_scatter_plot.html')
 ```
 
-![](scatter1.gif)
+# Insert GIF Here
 
 Getting the hang of it? Pretty neat, right. Now we're ready for some more complicated graphs. But we could do better. 
 
@@ -294,9 +298,8 @@ py.offline.plot(fig, filename='plots/my_scatter_plot.html') # overwriting the pr
                                                       # this one is obviously better
 ```
 
-![](scatter2.gif)
+# insert gif here
 
-### Plotting GIS data with Plotly
 Now that we're dynamic plot pros, we're ready to move on the big challenge: creating a GIS map of policy decisions by institution. Though it looks challenging, it's not too challenging once you understand what's going on "under the hood" in Plotly (which is what we've been practicing!). 
 
 First, we need to do a few preprocessing steps to get the data the way we want it. You know how we hovered each bubble above and the institution name came up? What if we wanted to add enrollment and policy decision to that as well? We create a new feature, `text` to capture this information.
@@ -411,7 +414,7 @@ fig.show()
 fig.write_html("plots/map.html")
 ```
 
-![](map.gif)
+# Insert GIF Here
 
 
 And now we have an awesome interactive map of the United States, along with policy decisions of each 4-year institution in the data set. Beautiful!
@@ -428,13 +431,13 @@ For guidance on how to create your own website using Blogdown in R, I recommend 
 
 If you've worked with Blogdown in the past, you likely know about the `public` and `static` directories. To summarize, the `public` directory involves everything needed to build the site, and is often linked to its own GitHub repository. This is where the "magic" happens and your website is published. The static directory, on the other hand, contains all the files you want to publicize on your website. A typical Blogdown folder looks like the following:
 
-![](dir.png)
+# insert screenshot here
 
 If you noticed above, we were saving each of our interactive visualizations in `.html` format along the way in a special `plots` folder within the working directory. This is where all of these graphs are saved. 
 
 Now we just need to drag these graphs into our `static` directory in our `Website` folder (or, if you wanted to, you could have saved these graphs directly to the static folder!). 
 
-![](dragging.gif)
+# Insert GIF Here
 
 If you know Blogdown, you know you have to build your site using a special R script before pushing your changes to GitHub. We can do this with the R code below:
 
@@ -452,10 +455,10 @@ git push origin master
 
 And viola! Our new graphs are now published online so you can send your friends or clints interactive graphs:
 
-- **Histogram**: https://www.achearn.com/files/my_first_plot.html
+- Histogram: https://www.achearn.com/files/my_first_plot.html
 
-- **Bar Chart**: https://www.achearn.com/files/my_scatter_plot.html
+- Bar Chart: https://www.achearn.com/files/my_scatter_plot.html
 
-- **Map**: https://www.achearn.com/files/map.html
+- Map: https://www.achearn.com/files/map.html
 
 I hope this tutorial has been useful for teaching users how to use Plotly, its key features, and how to utilize the package alongside Blogdown to create interactive visualizations to publish online.
