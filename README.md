@@ -35,14 +35,11 @@ init_notebook_mode(connected=True)
 
 
 
-Now we're ready to work with some real data! For this exercise, we'll be using data from a research project of mine: mapping Fall 2020 modes of instruction of 4-year colleges and universities, which is available on my GitHub:
+Now we're ready to work with some real data! For this exercise, we'll be using data from a research project of mine: mapping Fall 2020 modes of instruction of 4-year colleges and universities, which is available on my GitHub page here:
 
 
 ```python
 dta = pd.read_csv('covid_college.csv')
-
-# just the data we need
-#dta = dta[['institution', 'lat', 'lon', 'act_avg', 'adm_rate', 'online','enrollment', 'endowment', 'public']]
 
 dta.head(5)
 ```
