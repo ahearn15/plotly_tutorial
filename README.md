@@ -199,8 +199,9 @@ dta.head(5)
 <p>900 rows × 45 columns</p>
 
 
+### Plotting simple, interactive graphs in Plotly
 
-Before we get into the more complicated GIS graphs (using the lat/long data), we'll start with some simpler ones. Like a **histogram**:
+Before we get into the more complicated GIS graphs (using latitude/longitude data), we'll start with some simpler ones. Like a **histogram**:
 
 We'll be plotting the distribution of ACT scores in my sample of institutions:
 
@@ -228,9 +229,7 @@ py.offline.plot(fig, filename='plots/my_first_plot.html')
 
 ![](hist.gif)
 
-
-
-We saved the graph to our local dictionary as an `.html` file, so we will soon post it to our fancy blogdown website!
+Note that the output above is a GIF of the output you should see when you run the code yourself. We also saved this plot as an `.html` file, which we'll use later to publish to our website.
 
 Now we can do a **scatter plot**: Let's look at the relationship between in-state and out-of-state tuition rates for public universities:
 
@@ -297,6 +296,7 @@ py.offline.plot(fig, filename='plots/my_scatter_plot.html') # overwriting the pr
 
 ![](scatter2.gif)
 
+### Plotting GIS data with Plotly
 Now that we're dynamic plot pros, we're ready to move on the big challenge: creating a GIS map of policy decisions by institution. Though it looks challenging, it's not too challenging once you understand what's going on "under the hood" in Plotly (which is what we've been practicing!). 
 
 First, we need to do a few preprocessing steps to get the data the way we want it. You know how we hovered each bubble above and the institution name came up? What if we wanted to add enrollment and policy decision to that as well? We create a new feature, `text` to capture this information.
@@ -452,10 +452,10 @@ git push origin master
 
 And viola! Our new graphs are now published online so you can send your friends or clints interactive graphs:
 
-- Histogram: https://www.achearn.com/files/my_first_plot.html
+- **Histogram**: https://www.achearn.com/files/my_first_plot.html
 
-- Bar Chart: https://www.achearn.com/files/my_scatter_plot.html
+- **Bar Chart**: https://www.achearn.com/files/my_scatter_plot.html
 
-- Map: https://www.achearn.com/files/map.html
+- **Map**: https://www.achearn.com/files/map.html
 
 I hope this tutorial has been useful for teaching users how to use Plotly, its key features, and how to utilize the package alongside Blogdown to create interactive visualizations to publish online.
